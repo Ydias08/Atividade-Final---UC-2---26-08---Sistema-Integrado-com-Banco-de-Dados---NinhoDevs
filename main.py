@@ -1,6 +1,6 @@
 from Conexao import Conexao
 
-conexaoBD = Conexao("localhost", "root", "123456", "escola_romeu")
+conexaoBD = Conexao("localhost", "root", "123456", "gestaoescolar")
 
 while True:
     print(f"{"-"* 15} Sistema de Gestão Escolar {"-"* 15}")
