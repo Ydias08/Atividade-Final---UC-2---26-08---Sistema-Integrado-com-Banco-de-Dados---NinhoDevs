@@ -8,6 +8,7 @@ while True:
     print('''
 1. Área do Aluno.
 2. Área do Professor.
+3. Ver Disciplinas.
 0. Encerrar programa.
     ''')
     escolha1 = int(input("Selecione a opção que deseja: "))
@@ -169,3 +170,19 @@ while True:
                         print(f"ID: {aluno[0]} | Nome: {aluno[1]}")
                 else:
                     print("Nenhum aluno encontrado nesta turma.")
+    
+    elif escolha1 == 3:
+        # Consultar todas as disciplinas com informações do professor
+        disciplinas = conexaoBD.consultarComParametros('''
+            SELECT Disciplina.id_disciplina, Disciplina.nome_disciplina, Professor.id_professor, Professor.nome_professor
+            FROM Disciplina
+            INNER JOIN Turma ON Disciplina.id_disciplina = Turma.id_disciplina
+            INNER JOIN Professor ON Turma.id_professor = Professor.id_professor;
+        ''', ())
+
+        if disciplinas:
+            print("Disciplinas Disponíveis:")
+            for disciplina in disciplinas:
+                print(f"ID da Disciplina: {disciplina[0]} | Nome: {disciplina[1]} | ID do Professor: {disciplina[2]} | Nome do Professor: {disciplina[3]}")
+        else:
+            print("Nenhuma disciplina encontrada.")
